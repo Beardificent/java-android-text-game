@@ -1,7 +1,10 @@
 package com.becode.java_workshop;
 
 
+import android.content.res.TypedArray;
 import android.view.View;
+
+import java.util.Random;
 
 public class Story {
 
@@ -37,6 +40,12 @@ public class Story {
                 break;
             case "charmander received":
                 receiveCharmander();
+                break;
+            case "squirtle received":
+                receiveSquirtle();
+                break;
+            case "bulbasaur received":
+                receiveBulbasaur();
                 break;
         }
     }
@@ -95,8 +104,8 @@ public class Story {
             nextMove2 = "";
             nextMove3 = "";
             nextMove4 = "";
-        } else if (pokemonReceived) {
-            gameScreen.image.setImageResource(R.drawable.viridianforest);
+        } else if (pokemonReceived == true) {
+            gameScreen.image.setImageResource(R.drawable.outsidepallet);
             gameScreen.text.setText("You look around and see a beautiful forest, what was that old man on about? " +
                     "\n\nThere's a sign in front of you");
 
@@ -116,6 +125,30 @@ public class Story {
             nextMove2 = "caterpie";
             nextMove3 = "trainer";
             nextMove4 = "pallet town";
+        } else {
+
+            int[] possibleEncounters = {R.drawable.pidgey, R.drawable.rattata, R.drawable.caterpie, R.drawable.pidgey, R.drawable.outsidepallet};
+            Random rand = new Random();
+            gameScreen.image.setImageResource(possibleEncounters[new Random().nextInt(possibleEncounters.length)]);
+
+            gameScreen.text.setText("Don't go out! It's unsafe! Wild Pokémon live in tall grass! You need your own Pokémon for your protection.\n\n Meet me at my lab.");
+
+            gameScreen.button1.setText("Go back");
+            //gameScreen.button1.setTransformationMethod(null);
+
+            gameScreen.button2.setText("");
+            gameScreen.button2.setVisibility(View.INVISIBLE);
+
+            gameScreen.button3.setText("");
+            gameScreen.button3.setVisibility(View.INVISIBLE);
+
+            gameScreen.button4.setText("");
+            gameScreen.button4.setVisibility(View.INVISIBLE);
+
+            nextMove1 = "pallet town";
+            nextMove2 = "";
+            nextMove3 = "";
+            nextMove4 = "";
         }
 
     }
@@ -168,8 +201,8 @@ public class Story {
             gameScreen.button4.setVisibility(View.VISIBLE);
 
             nextMove1 = "charmander received";
-            nextMove2 = "starter pokemon received";
-            nextMove3 = "starter pokemon received";
+            nextMove2 = "squirtle received";
+            nextMove3 = "bulbasaur received";
             nextMove4 = "pallet town";
 
         }
@@ -201,9 +234,10 @@ public class Story {
 
     public void receiveCharmander(){
         pokemonReceived = true;
+        pokemon = "Charmander";
         gameScreen.image.setImageResource(R.drawable.charmander);
-        gameScreen.text.setText(R.string.oaksQuestion);
-        gameScreen.button1.setText("Leave");
+        gameScreen.text.setText("Say hello to best Pokémon, ever! \n\nWelcome Charmander!");
+        gameScreen.button1.setText("Nice!");
 
         gameScreen.button2.setText("");
         gameScreen.button2.setVisibility(View.INVISIBLE);
@@ -220,6 +254,49 @@ public class Story {
         nextMove4 = "";
     }
 
+    public void receiveSquirtle(){
+        pokemonReceived = true;
+        pokemon = "Squirtle";
+        gameScreen.image.setImageResource(R.drawable.squirtle);
+        gameScreen.text.setText("Hope you're in for one 'Shell' of a time! \n\nMeet Squirtle!");
+        gameScreen.button1.setText("Cool!");
+
+        gameScreen.button2.setText("");
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+
+        gameScreen.button3.setText("");
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+
+        gameScreen.button4.setText("");
+        gameScreen.button4.setVisibility(View.INVISIBLE);
+
+        nextMove1 = "pallet town";
+        nextMove2 = "";
+        nextMove3 = "";
+        nextMove4 = "";
+    }
+
+    public void receiveBulbasaur(){
+        pokemonReceived = true;
+        pokemon = "Bulbasaur";
+        gameScreen.image.setImageResource(R.drawable.bulbasaur);
+        gameScreen.text.setText("Once you go green, you're never mean, unless you get mad! \n\nBig applause for Bulbasaur!");
+        gameScreen.button1.setText("Groovy!");
+
+        gameScreen.button2.setText("");
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+
+        gameScreen.button3.setText("");
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+
+        gameScreen.button4.setText("");
+        gameScreen.button4.setVisibility(View.INVISIBLE);
+
+        nextMove1 = "pallet town";
+        nextMove2 = "";
+        nextMove3 = "";
+        nextMove4 = "";
+    }
 
 }
 
