@@ -26,6 +26,9 @@ public class Story {
             case "pallet town":
                 startingPoint();
                 break;
+            case "outside pallet town":
+                palletEntrance();
+                break;
             case "lab":
                 oakLab();
                 break;
@@ -57,11 +60,74 @@ public class Story {
         gameScreen.button4.setText(R.string.new_game_button_four);
         gameScreen.button4.setVisibility(View.VISIBLE);
 
-        nextMove1 = "outside town";
+        nextMove1 = "outside pallet town";
         nextMove2 = "lab";
         nextMove3 = "lake";
         nextMove4 = "knock doors";
     }
+
+    //
+    //
+    // GO BACK => PALLET ENTRANCE
+    //
+    //
+
+    public void palletEntrance(){
+
+        if(!metOak){
+            metOak = true;
+            gameScreen.image.setImageResource(R.drawable.profoak);
+            gameScreen.text.setText("Don't go out! It's unsafe! Wild Pokémon live in tall grass! You need your own Pokémon for your protection.\n\n Meet me at my lab.");
+
+            gameScreen.button1.setText("Go back");
+            //gameScreen.button1.setTransformationMethod(null);
+
+            gameScreen.button2.setText("");
+            gameScreen.button2.setVisibility(View.INVISIBLE);
+
+            gameScreen.button3.setText("");
+            gameScreen.button3.setVisibility(View.INVISIBLE);
+
+            gameScreen.button4.setText("");
+            gameScreen.button4.setVisibility(View.INVISIBLE);
+
+            nextMove1 = "pallet town";
+            nextMove2 = "";
+            nextMove3 = "";
+            nextMove4 = "";
+        } else if (pokemonReceived) {
+            gameScreen.image.setImageResource(R.drawable.viridianforest);
+            gameScreen.text.setText("You look around and see a beautiful forest, what was that old man on about? " +
+                    "\n\nThere's a sign in front of you");
+
+            gameScreen.button1.setText("Read sign");
+            //gameScreen.button1.setTransformationMethod(null);
+
+            gameScreen.button2.setText("Go north");
+            gameScreen.button2.setVisibility(View.VISIBLE);
+
+            gameScreen.button3.setText("Go east");
+            gameScreen.button3.setVisibility(View.VISIBLE);
+
+            gameScreen.button4.setText("Go back");
+            gameScreen.button4.setVisibility(View.VISIBLE);
+
+            nextMove1 = "viridian forest sign";
+            nextMove2 = "caterpie";
+            nextMove3 = "trainer";
+            nextMove4 = "pallet town";
+        }
+
+    }
+
+
+
+
+    //
+    //
+    // VISIT THE LAB
+    //
+    //
 
     public void oakLab() {
 
@@ -134,6 +200,7 @@ public class Story {
     }
 
     public void receiveCharmander(){
+        pokemonReceived = true;
         gameScreen.image.setImageResource(R.drawable.charmander);
         gameScreen.text.setText(R.string.oaksQuestion);
         gameScreen.button1.setText("Leave");
