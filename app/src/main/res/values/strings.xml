@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">java-workshop</string>
+    <string name="start">Start</string>
+    <string name="textview">TextView</string>
+    <string name="pokemon_game">Pokemon Game</string>
+    <string name="startimage">startImage</string>
+    <string name="button_2">Button 2</string>
+    <string name="button_1">Button 1</string>
+    <string name="button_3">Button 3</string>
+    <string name="button_4">Button 4</string>
+    <string name="title_screen">Title Screen</string>
+    <string name="new_start_text">You find yourself in a small village, the only way out is going back.\n\n
+        It look\'s nice, might want to check it out before heading back.
+    </string>
+    <string name="new_game_button_one">Go back</string>
+    <string name="new_game_button_two">Visit the Lab</string>
+    <string name="new_game_button_three">Visit the lake</string>
+    <string name="new_game_button_four">Knock on doors</string>
+    <string name="oaksQuestion">Hello there! Good that you came, I have a question for you, which color do you like
+        best?
+    </string>
+    <string name="oaksBookshelfUnvisited">You see a lot of books about Pokemon. One catches your eye and you grab it
+        from its place. \'Pokenatomy\', the cover reads. Better put it back.
+    </string>
+    <string name="oaksBookshelfVisited">You\'d rather not open that book again, you saw too much of Chansey already.
+    </string>
+</resources>
