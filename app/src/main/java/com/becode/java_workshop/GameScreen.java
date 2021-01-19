@@ -33,6 +33,11 @@ public class GameScreen extends AppCompatActivity {
         story.startingPoint();
     }
 
+    public void homeScreen(){
+    Intent homeScreen = new Intent(this, HomeScreen.class);
+    startActivity(homeScreen);
+    }
+
     public void selectedButton1(View game){
 
         story.selectPosition(story.nextMove1);
@@ -55,4 +60,5 @@ public class GameScreen extends AppCompatActivity {
         story.selectPosition(story.nextMove4);
 
     }
+
 }

@@ -1,7 +1,6 @@
 package com.becode.java_workshop;
 
 
-import android.content.res.TypedArray;
 import android.view.View;
 
 import java.util.Random;
@@ -17,6 +16,7 @@ public class Story {
     boolean bookshelvesOakVisited = false;
     boolean pokemonReceived = false;
     boolean metOak = false;
+    boolean gameOver = false;
 
 
     public Story(GameScreen gameScreen) {
@@ -29,9 +29,10 @@ public class Story {
             case "pallet town":
                 startingPoint();
                 break;
-            case "outside pallet town":
-                palletEntrance();
+            case "knock doors":
+                palletKnockDoors();
                 break;
+                //OAKS LAB
             case "lab":
                 oakLab();
                 break;
@@ -47,6 +48,16 @@ public class Story {
             case "bulbasaur received":
                 receiveBulbasaur();
                 break;
+            case "game over":
+                gameScreen.homeScreen();
+                break;
+                //PALLET ENTRANCE
+            case "outside pallet town":
+                palletEntrance();
+                break;
+            case "join pikachu":
+                frolicWithPikachu();
+                break;
         }
     }
 
@@ -57,17 +68,16 @@ public class Story {
 
         gameScreen.text.setText(R.string.new_start_text);
 
-        gameScreen.button1.setText(R.string.new_game_button_one);
+        gameScreen.button1.setText(R.string.goBack);
         //gameScreen.button1.setTransformationMethod(null);
 
-        gameScreen.button2.setText(R.string.new_game_button_two);
-        gameScreen.button2.setVisibility(View.VISIBLE);
+        gameScreen.button2.setText(R.string.visitLab);
 
-        gameScreen.button3.setText(R.string.new_game_button_three);
-        gameScreen.button3.setVisibility(View.VISIBLE);
+        gameScreen.button3.setText(R.string.visitLake);
 
-        gameScreen.button4.setText(R.string.new_game_button_four);
-        gameScreen.button4.setVisibility(View.VISIBLE);
+        gameScreen.button4.setText(R.string.knockDoors);
+
+        showAllButtons();
 
         nextMove1 = "outside pallet town";
         nextMove2 = "lab";
@@ -75,60 +85,86 @@ public class Story {
         nextMove4 = "knock doors";
     }
 
-    //
-    //
-    // GO BACK => PALLET ENTRANCE
-    //
-    //
+//
+//
+// INSIDE PALLET TOWN
+//
+//
+
+    public void palletKnockDoors(){
+
+        gameScreen.image.setImageResource(R.drawable.schoolboy);
+
+        gameScreen.text.setText(R.string.palletSchoolBoy);
+
+        gameScreen.button1.setText(R.string.goBack);
+        //gameScreen.button1.setTransformationMethod(null);
+        gameScreen.button2.setText(R.string.visitLab);
+
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.button4.setVisibility(View.INVISIBLE);
+
+        nextMove1 = "pallet town";
+        nextMove2 = "lab";
+        nextMove3 = "";
+        nextMove4 = "";
+
+    }
+
+//
+//
+// PALLET ENTRANCE
+//
+//
 
     public void palletEntrance() {
 
         if (!metOak) {
             metOak = true;
             gameScreen.image.setImageResource(R.drawable.profoak);
-            gameScreen.text.setText("Don't go out! It's unsafe! Wild Pokémon live in tall grass! You need your own Pokémon for your protection.\n\n Meet me at my lab.");
+            gameScreen.text.setText(R.string.palletOaksWarning);
 
-            gameScreen.button1.setText("Go back");
+            gameScreen.button1.setText(R.string.goBack);
             //gameScreen.button1.setTransformationMethod(null);
 
-            gameScreen.button2.setText("");
             gameScreen.button2.setVisibility(View.INVISIBLE);
 
-            gameScreen.button3.setText("");
             gameScreen.button3.setVisibility(View.INVISIBLE);
 
-            gameScreen.button4.setText("");
             gameScreen.button4.setVisibility(View.INVISIBLE);
 
             nextMove1 = "pallet town";
             nextMove2 = "";
             nextMove3 = "";
             nextMove4 = "";
-        } else if (pokemonReceived == true) {
+        } else if (pokemonReceived) {
             gameScreen.image.setImageResource(R.drawable.outsidepallet);
-            gameScreen.text.setText("You look around and see a beautiful forest, what was that old man on about? " +
-                    "\n\nThere's a sign in front of you");
+            gameScreen.text.setText(R.string.outsidePalletPikachu);
 
-            gameScreen.button1.setText("Read sign");
+            gameScreen.button1.setText(R.string.readSign);
             //gameScreen.button1.setTransformationMethod(null);
 
-            gameScreen.button2.setText("Go north");
-            gameScreen.button2.setVisibility(View.VISIBLE);
+            gameScreen.button2.setText(R.string.frolic);
 
-            gameScreen.button3.setText("Go east");
-            gameScreen.button3.setVisibility(View.VISIBLE);
+            gameScreen.button3.setText(R.string.goEast);
 
-            gameScreen.button4.setText("Go back");
-            gameScreen.button4.setVisibility(View.VISIBLE);
+            gameScreen.button4.setText(R.string.goBack);
+
+            showAllButtons();
 
             nextMove1 = "viridian forest sign";
-            nextMove2 = "caterpie";
+            nextMove2 = "join pikachu";
             nextMove3 = "trainer";
             nextMove4 = "pallet town";
         } else {
 
-            int[] possibleEncounters = {R.drawable.pidgey, R.drawable.rattata, R.drawable.caterpie, R.drawable.outsidepallet};
-            Random rand = new Random();
+            int[] possibleEncounters =
+                    {
+                            R.drawable.pidgey,
+                            R.drawable.rattata,
+                            R.drawable.caterpie,
+                            R.drawable.outsidepallet};
+
             int encounter = new Random().nextInt(possibleEncounters.length);
             gameScreen.image.setImageResource(possibleEncounters[encounter]);
 
@@ -136,16 +172,13 @@ public class Story {
                 case 0:
                     gameScreen.text.setText("A wild Pidgey appears out of nowhere, gusting everywhere! You're startled, you run back to Pallet Town.");
 
-                    gameScreen.button1.setText("Go back");
+                    gameScreen.button1.setText(R.string.goBack);
                     //gameScreen.button1.setTransformationMethod(null);
 
-                    gameScreen.button2.setText("");
                     gameScreen.button2.setVisibility(View.INVISIBLE);
 
-                    gameScreen.button3.setText("");
                     gameScreen.button3.setVisibility(View.INVISIBLE);
 
-                    gameScreen.button4.setText("");
                     gameScreen.button4.setVisibility(View.INVISIBLE);
 
                     nextMove1 = "pallet town";
@@ -159,14 +192,8 @@ public class Story {
 
                     gameScreen.button1.setText("Go back");
                     //gameScreen.button1.setTransformationMethod(null);
-
-                    gameScreen.button2.setText("");
                     gameScreen.button2.setVisibility(View.INVISIBLE);
-
-                    gameScreen.button3.setText("");
                     gameScreen.button3.setVisibility(View.INVISIBLE);
-
-                    gameScreen.button4.setText("");
                     gameScreen.button4.setVisibility(View.INVISIBLE);
 
                     nextMove1 = "pallet town";
@@ -177,16 +204,13 @@ public class Story {
                 case 2:
                     gameScreen.text.setText("Oh, a Caterpie! Well...*enter excuse why you couldn't possible brave a Caterpie*\n\n\nA CATERPIE!");
 
-                    gameScreen.button1.setText("Go back");
+                    gameScreen.button1.setText(R.string.goBack);
                     //gameScreen.button1.setTransformationMethod(null);
 
-                    gameScreen.button2.setText("");
                     gameScreen.button2.setVisibility(View.INVISIBLE);
 
-                    gameScreen.button3.setText("");
                     gameScreen.button3.setVisibility(View.INVISIBLE);
 
-                    gameScreen.button4.setText("");
                     gameScreen.button4.setVisibility(View.INVISIBLE);
 
                     nextMove1 = "pallet town";
@@ -197,20 +221,17 @@ public class Story {
                 default:
                     gameScreen.text.setText("This is so peaceful. All Pikachu, frolicking in the forest. You'd like to join them.");
 
-                    gameScreen.button1.setText("Go back");
+                    gameScreen.button1.setText(R.string.goBack);
                     //gameScreen.button1.setTransformationMethod(null);
 
                     gameScreen.button2.setText("frolic");
+
                     gameScreen.button2.setVisibility(View.VISIBLE);
-
-                    gameScreen.button3.setText("");
                     gameScreen.button3.setVisibility(View.INVISIBLE);
-
-                    gameScreen.button4.setText("");
                     gameScreen.button4.setVisibility(View.INVISIBLE);
 
                     nextMove1 = "pallet town";
-                    nextMove2 = "join Pikachu";
+                    nextMove2 = "join pikachu";
                     nextMove3 = "";
                     nextMove4 = "";
 
@@ -220,12 +241,48 @@ public class Story {
 
     }
 
+    public void frolicWithPikachu() {
+        if (pokemonReceived) {
+            gameScreen.image.setImageResource(R.drawable.emptyspot);
+            gameScreen.text.setText("The Pikachu notice your " + pokemon + ", they quickly run and hide.");
+            gameScreen.button1.setText("Continue");
+            //gameScreen.button1.setTransformationMethod(null);
 
-    //
-    //
-    // VISIT THE LAB
-    //
-    //
+            gameScreen.button2.setText(R.string.goBack);
+            gameScreen.button2.setVisibility(View.VISIBLE);
+
+            gameScreen.button3.setVisibility(View.INVISIBLE);
+
+            gameScreen.button4.setVisibility(View.INVISIBLE);
+
+            nextMove1 = "viridian city";
+            nextMove2 = "outside pallet town";
+        } else {
+            gameScreen.image.setImageResource(R.drawable.pikachu);
+            gameScreen.text.setText("One weirdly dressed Pikachu runs up to you, before you know it, you've been shocked and robbed of your kidneys.\n\n You died.");
+            gameOver = true;
+            gameScreen.button1.setText("Back to Menu");
+            //gameScreen.button1.setTransformationMethod(null);
+
+            gameScreen.button2.setVisibility(View.INVISIBLE);
+
+            gameScreen.button3.setVisibility(View.INVISIBLE);
+
+            gameScreen.button4.setVisibility(View.INVISIBLE);
+
+            nextMove1 = "game over";
+            nextMove2 = "";
+        }
+        nextMove3 = "";
+        nextMove4 = "";
+    }
+
+
+//
+//
+// VISIT THE LAB
+//
+//
 
     public void oakLab() {
 
@@ -254,16 +311,16 @@ public class Story {
 
             gameScreen.image.setImageResource(R.drawable.labwithoak);
             gameScreen.text.setText(R.string.oaksQuestion);
+
             gameScreen.button1.setText("Red");
 
             gameScreen.button2.setText("Blue");
-            gameScreen.button2.setVisibility(View.VISIBLE);
 
             gameScreen.button3.setText("Green");
-            gameScreen.button3.setVisibility(View.VISIBLE);
 
             gameScreen.button4.setText("Slowly back away");
-            gameScreen.button4.setVisibility(View.VISIBLE);
+
+            showAllButtons();
 
             nextMove1 = "charmander received";
             nextMove2 = "squirtle received";
@@ -278,18 +335,18 @@ public class Story {
 
         if (!bookshelvesOakVisited) {
             bookshelvesOakVisited = true;
-            gameScreen.text.setText(R.string.oaksBookshelfUnvisited);
+            gameScreen.text.setText(R.string.palletOaksBookshelfUnvisited);
 
         } else {
-            gameScreen.text.setText(R.string.oaksBookshelfVisited);
+            gameScreen.text.setText(R.string.palletOaksBookshelfVisited);
 
         }
-        gameScreen.button1.setText("Go back");
-        gameScreen.button2.setText("");
+        gameScreen.button1.setText(R.string.goBack);
+
         gameScreen.button2.setVisibility(View.INVISIBLE);
-        gameScreen.button3.setText("");
+
         gameScreen.button3.setVisibility(View.INVISIBLE);
-        gameScreen.button4.setText("");
+
         gameScreen.button4.setVisibility(View.INVISIBLE);
         nextMove1 = "lab";
         nextMove2 = "";
@@ -304,13 +361,13 @@ public class Story {
         gameScreen.text.setText("Say hello to best Pokémon, ever! \n\nWelcome Charmander!");
         gameScreen.button1.setText("Nice!");
 
-        gameScreen.button2.setText("");
+
         gameScreen.button2.setVisibility(View.INVISIBLE);
 
-        gameScreen.button3.setText("");
+
         gameScreen.button3.setVisibility(View.INVISIBLE);
 
-        gameScreen.button4.setText("");
+
         gameScreen.button4.setVisibility(View.INVISIBLE);
 
         nextMove1 = "pallet town";
@@ -348,13 +405,11 @@ public class Story {
         gameScreen.text.setText("Once you go green, you're never mean, unless you get mad! \n\nBig applause for Bulbasaur!");
         gameScreen.button1.setText("Groovy!");
 
-        gameScreen.button2.setText("");
+
         gameScreen.button2.setVisibility(View.INVISIBLE);
 
-        gameScreen.button3.setText("");
         gameScreen.button3.setVisibility(View.INVISIBLE);
 
-        gameScreen.button4.setText("");
         gameScreen.button4.setVisibility(View.INVISIBLE);
 
         nextMove1 = "pallet town";
@@ -363,10 +418,29 @@ public class Story {
         nextMove4 = "";
     }
 
+
+//
+//
+// GAME OVER
+//
+//
+
+
+
+//
+//
+// SHOW ALL BUTTONS
+//
+//
+
+    public void showAllButtons() {
+        gameScreen.button1.setVisibility(View.VISIBLE);
+        gameScreen.button2.setVisibility(View.VISIBLE);
+        gameScreen.button3.setVisibility(View.VISIBLE);
+        gameScreen.button4.setVisibility(View.VISIBLE);
+    }
 }
 
-
-//Tips
 
 // All button text is default in ALL CAPS. Should you want to write in lower caps:
 // EXAMPLE:: gameScreen.button1.setTransformationMethod(null);
