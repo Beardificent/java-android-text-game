@@ -52,6 +52,7 @@
     <string name="palletLakeNoSurf">You can see an island in the distance.\n\nToo bad you don\'t have any big water
         Pokemon.
     </string>
+    <string name="startButtonDescription">startButton</string>
 
 
 </resources>

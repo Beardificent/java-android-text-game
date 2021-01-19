@@ -17,16 +17,17 @@
 
     <Button
             android:id="@+id/button_start"
-            style="@style/DefaultButton"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/sugi"
+            android:background="@drawable/custom_button"
             android:text="@string/start"
-            android:textColor="@android:color/widget_edittext_dark"
+
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="75dp" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.497" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_text" app:layout_constraintVertical_bias="1.0"
-            android:onClick="startButtonClicked"/>
-            <!--Link button to method in .java-->
+            android:onClick="startButtonClicked" android:contentDescription="@string/startButtonDescription"/>
+
+
+    <!--Link button to method in .java-->
 </androidx.constraintlayout.widget.ConstraintLayout>
