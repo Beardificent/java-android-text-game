@@ -134,17 +134,17 @@ public class Story {
             gameScreen.button1.setText(R.string.goBack);
             //gameScreen.button1.setTransformationMethod(null);
 
-            gameScreen.button2.setText(R.string.surf);
+            gameScreen.button2.setText(R.string.visitLab);
 
-            gameScreen.button3.setText(R.string.visitLab);
+            gameScreen.button3.setText(R.string.surf);
+            gameScreen.button3.setVisibility(View.INVISIBLE);
 
             gameScreen.button4.setText(R.string.knockDoors);
-            gameScreen.button4.setVisibility(View.INVISIBLE);
-            showAllButtons();
+            gameScreen.button4.setVisibility(View.VISIBLE);
 
             nextMove1 = "pallet town";
-            nextMove2 = "surf";
-            nextMove3 = "lab";
+            nextMove2 = "lab";
+            nextMove3 = "surf";
             nextMove4 = "";
         }
 

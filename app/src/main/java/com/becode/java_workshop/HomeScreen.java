@@ -27,6 +27,7 @@ public class HomeScreen extends AppCompatActivity {
         Button startButton = (Button) findViewById(R.id.button_start);
         //remove start text from button on start up by replacing with an empty string
         startButton.setText(" ");
+
     }
     //by passing "View randomName" as  argument, this method becomes visible in .xml onClick
     public void startButtonClicked(View game){
