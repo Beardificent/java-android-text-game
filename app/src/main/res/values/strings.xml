@@ -24,7 +24,8 @@
     <string name="visitLake">Visit the lake</string>
     <string name="knockDoors">Knock on doors</string>
     <string name="readSign">Read sign</string>
-    <string name="frolic">frolic</string>
+    <string name="frolic">Frolic</string>
+    <string name="surf">Surf</string>
 
     <!-- PALLET TOWN -->
 
@@ -48,5 +49,9 @@
     <string name="outsidePalletPikachu">You look around and see a beautiful forest, what was that old man on about?
         Pikachu\'s frolicking about everywhere! \n\nThere\'s a sign in front of you
     </string>
+    <string name="palletLakeNoSurf">You can see an island in the distance.\n\nToo bad you don\'t have any big water
+        Pokemon.
+    </string>
+
 
 </resources>

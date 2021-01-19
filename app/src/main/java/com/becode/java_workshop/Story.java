@@ -1,6 +1,10 @@
 package com.becode.java_workshop;
 
 
+import android.graphics.Typeface;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
 import android.view.View;
 
 import java.util.Random;
@@ -17,6 +21,7 @@ public class Story {
     boolean pokemonReceived = false;
     boolean metOak = false;
     boolean gameOver = false;
+    boolean hasBigWaterPokemon = false;
 
 
     public Story(GameScreen gameScreen) {
@@ -32,9 +37,11 @@ public class Story {
             case "knock doors":
                 palletKnockDoors();
                 break;
-                //OAKS LAB
             case "lab":
                 oakLab();
+                break;
+            case "lake":
+                palletLake();
                 break;
             case "bookshelvesOak":
                 bookshelvesOak();
@@ -64,7 +71,7 @@ public class Story {
     //Now that we can access our GameScreen class, let's create a method for our starting location (set     story and set button options)
     public void startingPoint() {
 
-        gameScreen.image.setImageResource(R.drawable.pallettown);
+        gameScreen.image.setImageResource(R.drawable.pallettownalt);
 
         gameScreen.text.setText(R.string.new_start_text);
 
@@ -108,6 +115,38 @@ public class Story {
         nextMove2 = "lab";
         nextMove3 = "";
         nextMove4 = "";
+
+    }
+
+    public void palletLake(){
+
+        if(!hasBigWaterPokemon) {
+            gameScreen.image.setImageResource(R.drawable.pallettownlake);
+
+            gameScreen.text.setText(R.string.palletLakeNoSurf);
+            //BOLD TEXT IN TEXTVIEW
+            SpannableString boldLetters = new SpannableString("You can see an island in the distance.\n\nToo bad you don't have any big water Pokemon.");
+            StyleSpan boldSpan = new StyleSpan(Typeface.BOLD);
+            boldLetters.setSpan(boldSpan, 67, 84, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            gameScreen.text.setText(boldLetters);
+
+
+            gameScreen.button1.setText(R.string.goBack);
+            //gameScreen.button1.setTransformationMethod(null);
+
+            gameScreen.button2.setText(R.string.surf);
+
+            gameScreen.button3.setText(R.string.visitLab);
+
+            gameScreen.button4.setText(R.string.knockDoors);
+            gameScreen.button4.setVisibility(View.INVISIBLE);
+            showAllButtons();
+
+            nextMove1 = "pallet town";
+            nextMove2 = "surf";
+            nextMove3 = "lab";
+            nextMove4 = "";
+        }
 
     }
 
